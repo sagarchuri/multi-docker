@@ -1,0 +1,36 @@
+{
+"AWSEBDockerrunVersion": 2,
+"containerDefinitions":[
+	{
+		"name": "client",
+		"image": "sagarchuri/multi-client",
+		"hostname": "client",
+		"essential": false
+	},
+	{
+		"name": "server",
+		"image": "sagarchuri/multi-server",
+		"hostname": "api",
+		"essential": false
+	},
+	{
+		"name": "worker",
+		"image": "sagarchuri/multi-worker",
+		"hostname": "worker",
+		"essential": false
+	},
+	{
+		"name": "nginx",
+		"image": "sagarchuri/multi-nginx",
+		"hostname": "nginx",
+		"essential": true,
+		"portMappings":[
+		{
+			"hostPort": 80,
+			"containerPort": 80
+		}
+		],
+		"links": ["client","server"]
+	}
+]
+}
